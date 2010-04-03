@@ -92,6 +92,10 @@ Name: vs2005; Description: Visual Studio 2005 integration
 Name: vs2008; Description: Visual Studio 2008 integration
 Name: vs2010; Description: Visual Studio 2010 integration
 
+[Run]
+Filename: {app}\Installer\Git-1.6.5.1-preview20091022.exe; Components: msysgit
+Filename: {app}\Installer\KDiff3Setup_0.9.95.exe; Components: KDiff3
+
 [Code]
 #define UninstallKey "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\" + AppID + "_is1"
 

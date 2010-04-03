@@ -79,13 +79,13 @@ Name: {group}\User Manual; Filename: {app}\GitExtensionsUserManual.pdf
 Name: {group}\Git Extensions; Filename: {app}\GitExtensions.exe; WorkingDir: {app}; IconFilename: {app}\cow-head.ico; IconIndex: 0
 
 [Registry]
-Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: string; ValueName: checksettings; ValueData: true
-Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: string; ValueName: InstallDir; ValueData: {app}
-Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: string; ValueName: gitssh; ValueData: {app}\PuTTY\plink.exe
-
-Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: string; ValueName: plink; ValueData: {app}\PuTTY\plink.exe
-Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: string; ValueName: pageant; ValueData: {app}\PuTTY\pageant.exe
-Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: string; ValueName: puttygen; ValueData: {app}\PuTTY\puttygen.exe
+#define RegKey "Software\\GitExtensions\\GitExtensions\\1.0.0.0"
+Root: HKCU; Subkey: {#RegKey}; ValueType: string; ValueName: checksettings; ValueData: true
+Root: HKCU; Subkey: {#RegKey}; ValueType: string; ValueName: InstallDir; ValueData: {app}
+Root: HKCU; Subkey: {#RegKey}; ValueType: string; ValueName: gitssh; ValueData: {app}\PuTTY\plink.exe
+Root: HKCU; Subkey: {#RegKey}; ValueType: string; ValueName: plink; ValueData: {app}\PuTTY\plink.exe
+Root: HKCU; Subkey: {#RegKey}; ValueType: string; ValueName: pageant; ValueData: {app}\PuTTY\pageant.exe
+Root: HKCU; Subkey: {#RegKey}; ValueType: string; ValueName: puttygen; ValueData: {app}\PuTTY\puttygen.exe
 
 [Types]
 Name: default; Description: Default install; Flags: iscustom

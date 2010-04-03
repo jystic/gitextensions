@@ -46,17 +46,7 @@ Source: ..\Bin\puttygen.exe; DestDir: {app}\PuTTY
 
 Source: ..\Bin\KDiff3Setup_0.9.95.exe; DestDir: {app}\Installer; Components: KDiff3
 Source: ..\Bin\Git-1.6.5.1-preview20091022.exe; DestDir: {app}\Installer; Components: msysgit
-
-Source: ..\Bin\Dictionaries\en-AU.dic; DestDir: {app}\Dictionaries
-Source: ..\Bin\Dictionaries\en-CA.dic; DestDir: {app}\Dictionaries
-Source: ..\Bin\Dictionaries\en-GB.dic; DestDir: {app}\Dictionaries
-Source: ..\Bin\Dictionaries\en-US.dic; DestDir: {app}\Dictionaries
-Source: ..\Bin\Dictionaries\es-ES.dic; DestDir: {app}\Dictionaries
-Source: ..\Bin\Dictionaries\es-MX.dic; DestDir: {app}\Dictionaries
-Source: ..\Bin\Dictionaries\fr-FR.dic; DestDir: {app}\Dictionaries
-Source: ..\Bin\Dictionaries\it-IT.dic; DestDir: {app}\Dictionaries
-Source: ..\Bin\Dictionaries\nl-NL.dic; DestDir: {app}\Dictionaries
-Source: ..\Bin\Dictionaries\de-DE.dic; DestDir: {app}\Dictionaries
+Source: ..\Bin\Dictionaries\*; DestDir: {app}\Dictionaries
 
 Source: ..\GitCommands\GitExtensions\bin\Release\GitExtensions.exe; DestDir: {app}
 Source: ..\GitCommands\GitExtensions\bin\Release\GitCommands.dll; DestDir: {app}

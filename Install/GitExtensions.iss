@@ -1,13 +1,23 @@
+#define Name "Git Extensions"
+#define PathName "GitExtensions"
+#define Version "1.92"
+#define PathVersion "192"
+
+#pragma parseroption -p-
+
 [Setup]
-AppName=Git Extensions
-AppVerName=Git Extensions 1.92 (preview)
-AppVersion=1.92
-AppID={132609D0-4C45-4DE0-B8E8-54DB8517F900}
+AppName={#Name}
+AppVerName={#Name} {#Version}
+AppVersion={#Version}
+AppID={{132609D0-4C45-4DE0-B8E8-54DB8517F900}
+VersionInfoVersion={#Version}
+VersionInfoProductName={#Name} {#Version}
+VersionInfoProductVersion={#Version}
 
-DefaultDirName={pf}\GitExtensions
-DefaultGroupName=Git Extensions
+DefaultDirName={pf}\{#PathName}
+DefaultGroupName={#Name}
 
-OutputBaseFilename=GitExtensionsSetup
+OutputBaseFilename={#PathName}{#PathVersion}SetupComplete
 SetupIconFile=..\cow-head.ico
 UninstallDisplayIcon={app}\cow-head.ico
 WizardImageFile=wizard.bmp
@@ -19,6 +29,7 @@ Compression=lzma/ultra64
 InternalCompressLevel=ultra64
 PrivilegesRequired=none
 ShowLanguageDialog=no
+ArchitecturesInstallIn64BitMode=x64
 
 [Files]
 Source: ..\cow-head.ico; DestDir: {app}
@@ -29,8 +40,8 @@ Source: ..\Bin\plink.exe; DestDir: {app}\PuTTY
 Source: ..\Bin\pageant.exe; DestDir: {app}\PuTTY
 Source: ..\Bin\puttygen.exe; DestDir: {app}\PuTTY
 
-Source: ..\Bin\KDiff3Setup_0.9.95.exe; DestDir: {app}\Installer
-Source: ..\Bin\Git-1.6.5.1-preview20091022.exe; DestDir: {app}\Installer
+Source: ..\Bin\KDiff3Setup_0.9.95.exe; DestDir: {app}\Installer; Components: KDiff3
+Source: ..\Bin\Git-1.6.5.1-preview20091022.exe; DestDir: {app}\Installer; Components: msysgit
 
 Source: ..\Bin\Dictionaries\en-AU.dic; DestDir: {app}\Dictionaries
 Source: ..\Bin\Dictionaries\en-CA.dic; DestDir: {app}\Dictionaries
@@ -53,12 +64,15 @@ Source: ..\Plugins\AutoCheckForUpdates\bin\Release\AutoCheckForUpdates.dll; Dest
 Source: ..\Plugins\AutoCompileSubmodules\AutoCompileSubmodules\bin\Release\AutoCompileSubmodules.dll; DestDir: {app}\Plugins
 Source: ..\Plugins\Statistics\GitStatistics\bin\Release\GitStatistics.dll; DestDir: {app}\Plugins
 
-Source: ..\SimpleExt\ReleaseMinDependency\GitExtensionsShellEx.dll; DestDir: {app}; DestName: GitExtensionsShellEx32.dll
-Source: ..\SimpleExt\ReleaseMinDependency64\GitExtensionsShellEx.dll; DestDir: {app}; DestName: GitExtensionsShellEx64.dll
+Source: ..\SimpleExt\ReleaseMinDependency\GitExtensionsShellEx.dll; DestDir: {app}; Flags: regserver; Components: shellext; Check: not Is64BitInstallMode
+Source: ..\SimpleExt\ReleaseMinDependency64\GitExtensionsShellEx.dll; DestDir: {app}; Flags: regserver; Components: shellext; Check: Is64BitInstallMode
 
-Source: ..\GitPlugin\GitPlugin.AddIn; DestDir: {userdocs}\Visual Studio 2008\Addins
-Source: ..\GitPlugin\obj\Release\GitPlugin.dll; DestDir: {userdocs}\Visual Studio 2008\Addins
-Source: ..\GitPlugin\bin\en-US\GitPlugin.resources.dll; DestDir: {userdocs}\Visual Studio 2008\Addins\en-US
+#define VsSource(version, path) "Source: ..\\GitPlugIn\\" + path + "; DestDir: {userdocs}\\Visual Studio " + version + "\\Addins; Components: vs" + version + "\n"
+#define VsSourceAll(path) VsSource("2005", path) + VsSource("2008", path) + VsSource("2010", path)
+
+#emit VsSourceAll("GitPlugin.AddIn")
+#emit VsSourceAll("obj\\Release\\GitPlugin.dll")
+#emit VsSourceAll("bin\\en-US\\GitPlugin.resources.dll")
 
 [Icons]
 Name: {group}\User Manual; Filename: {app}\GitExtensionsUserManual.pdf
@@ -72,3 +86,14 @@ Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: str
 Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: string; ValueName: plink; ValueData: {app}\PuTTY\plink.exe
 Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: string; ValueName: pageant; ValueData: {app}\PuTTY\pageant.exe
 Root: HKCU; Subkey: Software\GitExtensions\GitExtensions\1.0.0.0; ValueType: string; ValueName: puttygen; ValueData: {app}\PuTTY\puttygen.exe
+
+[Types]
+Name: default; Description: Default install; Flags: iscustom
+
+[Components]
+Name: msysgit; Description: msysgit (1.6.5.1); Types: default
+Name: KDiff3; Description: KDiff3 (0.9.95); Types: default
+Name: shellext; Description: Shell extension; Types: default
+Name: vs2005; Description: Visual Studio 2005 integration
+Name: vs2008; Description: Visual Studio 2008 integration
+Name: vs2010; Description: Visual Studio 2010 integration

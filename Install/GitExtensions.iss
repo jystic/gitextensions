@@ -82,12 +82,12 @@ Root: HKCU; Subkey: {#RegKey}; ValueType: string; ValueName: pageant; ValueData:
 Root: HKCU; Subkey: {#RegKey}; ValueType: string; ValueName: puttygen; ValueData: {app}\PuTTY\puttygen.exe
 
 [Types]
-Name: default; Description: Default install; Flags: iscustom
+Name: standard; Description: Standard install; Flags: iscustom
 
 [Components]
-Name: msysgit; Description: msysgit (1.6.5.1); Types: default
-Name: KDiff3; Description: KDiff3 (0.9.95); Types: default
-Name: shellext; Description: Shell extension; Types: default
+Name: msysgit; Description: msysgit (1.6.5.1); Types: standard
+Name: KDiff3; Description: KDiff3 (0.9.95); Types: standard
+Name: shellext; Description: Shell extension; Types: standard
 Name: vs2005; Description: Visual Studio 2005 integration
 Name: vs2008; Description: Visual Studio 2008 integration
 Name: vs2010; Description: Visual Studio 2010 integration

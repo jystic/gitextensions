@@ -32,6 +32,8 @@ Compression=lzma/ultra64
 InternalCompressLevel=ultra64
 PrivilegesRequired=none
 ShowLanguageDialog=no
+DisableReadyPage=true
+ShowComponentSizes=false
 
 [Files]
 Source: ..\cow-head.ico; DestDir: {app}

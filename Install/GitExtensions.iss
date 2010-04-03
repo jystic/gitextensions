@@ -2,34 +2,36 @@
 #define PathName "GitExtensions"
 #define Version "1.92"
 #define PathVersion "192"
+#define AppID "{132609D0-4C45-4DE0-B8E8-54DB8517F900}"
 
 #pragma parseroption -p-
 
 [Setup]
+AppID={{#AppID}
 AppName={#Name}
 AppVerName={#Name} {#Version}
 AppVersion={#Version}
-AppID={{132609D0-4C45-4DE0-B8E8-54DB8517F900}
-VersionInfoVersion={#Version}
-VersionInfoProductName={#Name} {#Version}
-VersionInfoProductVersion={#Version}
+AppUpdatesURL=http://code.google.com/p/gitextensions
+AppSupportURL=http://github.com/spdr870/gitextensions/issues
 
 DefaultDirName={pf}\{#PathName}
 DefaultGroupName={#Name}
 
 OutputBaseFilename={#PathName}{#PathVersion}SetupComplete
+VersionInfoVersion={#Version}
+VersionInfoProductName={#Name} {#Version}
+VersionInfoProductVersion={#Version}
+
 SetupIconFile=..\cow-head.ico
 UninstallDisplayIcon={app}\cow-head.ico
 WizardImageFile=wizard.bmp
 WizardSmallImageFile=wizard-small.bmp
-AppUpdatesURL=http://code.google.com/p/gitextensions
-AppSupportURL=http://github.com/spdr870/gitextensions/issues
 
+ArchitecturesInstallIn64BitMode=x64
 Compression=lzma/ultra64
 InternalCompressLevel=ultra64
 PrivilegesRequired=none
 ShowLanguageDialog=no
-ArchitecturesInstallIn64BitMode=x64
 
 [Files]
 Source: ..\cow-head.ico; DestDir: {app}
@@ -97,3 +99,24 @@ Name: shellext; Description: Shell extension; Types: default
 Name: vs2005; Description: Visual Studio 2005 integration
 Name: vs2008; Description: Visual Studio 2008 integration
 Name: vs2010; Description: Visual Studio 2010 integration
+
+[Code]
+#define UninstallKey "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\" + AppID + "_is1"
+
+procedure PreInstall();
+var
+	uninstaller: String;
+	errorCode: Integer;
+begin
+	if RegKeyExists(HKEY_LOCAL_MACHINE, '{#UninstallKey}') then	begin
+		RegQueryStringValue(HKEY_LOCAL_MACHINE, '{#UninstallKey}', 'UninstallString', uninstaller);
+		ShellExec('runas', uninstaller, '/silent', '', SW_HIDE, ewWaitUntilTerminated, errorCode);
+	end;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if CurStep = ssInstall then begin
+    PreInstall();
+  end;
+end;

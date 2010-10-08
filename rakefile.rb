@@ -17,7 +17,7 @@
 #
 VERSION = `git describe --tags`.strip
 
-MSBUILD = "#{ENV['WinDir']}/Microsoft.NET/Framework/v3.5/msbuild.exe"
+MSBUILD = "#{ENV['WinDir']}/Microsoft.NET/Framework/v4.0.30319/msbuild.exe"
 CSPROJECTS = "**/*.csproj"
 MSIPROJECT = "Setup/Setup.wixproj"
 SHELL_EXT = "SimpleExt/SimpleExt.sln"
